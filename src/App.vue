@@ -1,26 +1,33 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="container">
+        <h4>Limity - tryb moderatora</h4>
+
+        <ul class="mt-4 nav nav-tabs" role="tablist">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#dzialy">
+                Działy
+            </button>
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#zbory">
+                Zbory
+            </button>
+        </ul>
+
+        <div class="tab-content" id="tabContent">
+            <TabPaneDzialy class="show active" id="dzialy" />
+            <TabPaneZbory id="zbory" />
+        </div>
+    </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import TabPaneDzialy from './TabPaneDzialy.vue';
+import TabPaneZbory from './TabPaneZbory.vue';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-top: 16pt;
 }
 </style>

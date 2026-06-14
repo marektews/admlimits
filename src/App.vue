@@ -12,15 +12,26 @@
         </ul>
 
         <div class="tab-content" id="tabContent">
-            <TabPaneDzialy class="show active" id="dzialy" />
-            <TabPaneZbory id="zbory" />
+            <TabPaneDzialy class="show active" id="dzialy" :tury="tury" />
+            <TabPaneZbory id="zbory" :tury="tury" />
         </div>
     </div>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
 import TabPaneDzialy from './TabPaneDzialy.vue';
 import TabPaneZbory from './TabPaneZbory.vue';
+
+// tury wg konfiguracji serwera (filozofia gokongres)
+const tury = ref([])
+
+onMounted(() => {
+    fetch('/api/config/all')
+    .then(r => r.ok ? r.json() : null)
+    .then(d => { tury.value = d?.tury ?? [] })
+    .catch(err => console.error('Load tury:', err))
+})
 
 </script>
 

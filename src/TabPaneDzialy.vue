@@ -13,15 +13,15 @@
 
             <div class="mb-3 d-flex justify-content-center">
                 <div class="form-check me-3">
-                    <input class="form-check-input" type="radio" :value="2" id="w2" v-model="tura">
-                    <label class="form-check-label" for="w2">
-                        W2
+                    <input class="form-check-input" type="radio" value="ALL" id="dz_tura_all" v-model="tura">
+                    <label class="form-check-label" for="dz_tura_all">
+                        Wszystko
                     </label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" :value="3" id="w3" v-model="tura">
-                    <label class="form-check-label" for="w3">
-                        W3
+                <div v-for="t in props.tury" :key="t.tid" class="form-check me-3" :title="t.name">
+                    <input class="form-check-input" type="radio" :value="t.tid" :id="`dz_tura_${t.tid}`" v-model="tura">
+                    <label class="form-check-label" :for="`dz_tura_${t.tid}`">
+                        {{ t.shortcut }}
                     </label>
                 </div>
             </div>
@@ -64,10 +64,11 @@ import { ref, computed, onMounted } from 'vue'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faCircleExclamation, faSave } from '@fortawesome/free-solid-svg-icons';
 
+const props = defineProps(['tury'])
 const show_error = ref(false)
 const dzialy = ref([])
-const tura = ref(3)
-const filtered_dzialy = computed(() => dzialy.value.filter((elem) => elem.tura === tura.value))
+const tura = ref('ALL')
+const filtered_dzialy = computed(() => dzialy.value.filter((elem) => tura.value === 'ALL' || elem.tura_id === tura.value))
 
 onMounted(loadLimits)
 

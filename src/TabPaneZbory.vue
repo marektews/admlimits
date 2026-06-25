@@ -35,22 +35,28 @@
                 </thead>
                 <tbody>
                     <tr v-for="(zbor, index) in filtered_zbory" :key="index">
-                        <td>{{ zbor.name }}</td>
-                        <td class="d-flex">
-                            <input 
-                                class="form-control text-center" 
-                                type="number" 
-                                :maxlength="2" 
-                                :min="0" 
-                                :max="99"
-                                v-model="zbor.plimit"
-                            >
-                            <button 
-                                class="btn btn-outline-primary ms-2"
-                                @click="on_Save(zbor)"
-                            >
-                                <FontAwesomeIcon :icon="faSave" />
-                            </button>
+                        <td colspan="2">
+                            <div class="d-flex align-items-center">
+                                <span class="flex-grow-1">{{ zbor.name }}</span>
+                                <input
+                                    class="form-control text-center w-auto"
+                                    type="number"
+                                    :maxlength="2"
+                                    :min="0"
+                                    :max="99"
+                                    v-model="zbor.plimit"
+                                >
+                                <button
+                                    class="btn btn-outline-primary ms-2"
+                                    @click="on_Save(zbor)"
+                                >
+                                    <FontAwesomeIcon :icon="faSave" />
+                                </button>
+                            </div>
+                            <div v-if="zbor.limitRequest" class="mt-2 p-2 alert alert-warning mb-0 d-flex flex-wrap column-gap-4">
+                                <div><strong>Nowa wartość limitu:</strong> {{ zbor.limitRequest.plimit }}</div>
+                                <div><strong>Uzasadnienie:</strong> {{ zbor.limitRequest.reason }}</div>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
